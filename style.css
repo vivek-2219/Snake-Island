@@ -47,6 +47,8 @@
 }
 
 .gameScore {
+    width: 100vw;
+    text-align: center;
     font-size: 67px;
     color: blue;
     position: absolute;
