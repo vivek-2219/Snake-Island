@@ -45,3 +45,11 @@
     top: 0px;
     font-size: 98px;
 }
+
+.gameScore {
+    font-size: 67px;
+    color: blue;
+    position: absolute;
+    top: 0px;
+}
+

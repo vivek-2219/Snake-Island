@@ -2,10 +2,11 @@
 let gameContainer = document.querySelector('.gameContainer');
 let gameBoard = document.querySelector('.gameBoard');
 let gameOver = document.querySelector('.gameOver');
+let gameScore = document.querySelector('.gameScore');
 
 // Game Variables for manipulating the game.
 let lastPaintTime = 0;
-let speed = 8;
+let speed = 6;
 
 let snakeElements = [
     { x: 6, y: 11 }
@@ -14,6 +15,8 @@ let snakeElements = [
 let foodElement = { x: 15, y: 11 };
 
 let directions = { x: 0, y: 0 };
+
+let score = 0;
 
 // Function to paint the game window again and again after certain intervals of time.
 function mainFunction(x) {
@@ -38,6 +41,9 @@ function isCollided(elem) {
         setTimeout(() => {
             gameOver.style.display = 'none';
         }, 3000);
+        
+        score = 0;
+        speed = 6;
     };
 
     // Reset the game to initial frame when snake collides with it's own body.
@@ -52,6 +58,9 @@ function isCollided(elem) {
             setTimeout(() => {
                 gameOver.style.display = 'none';
             }, 3000);
+
+            score = 0;
+            speed = 6;
         };
     };
 };
@@ -60,6 +69,9 @@ function isCollided(elem) {
 function mainGameLoop() {
     // Removing every element from the gameBoard so that no gameBoard is totally empty each time loop starts running.
     gameBoard.innerHTML = '';
+
+    // Displaying the score.
+    gameScore.innerHTML = `Score : ${score}`;
 
     // Creating the head of the snake and adding it to the gameBoard.
     snakeElements.forEach(element => {
@@ -85,6 +97,16 @@ function mainGameLoop() {
         let grid = 21;
         foodElement = { x: Math.round(grid * Math.random()), y: Math.round(grid * Math.random()) };
         snakeElements.push({ x: snakeElements[0].x, y: snakeElements[0].y });
+        score += 1;
+        if (score > 5) {
+            speed = 10
+        }
+        else if (score > 15) {
+            speed = 12
+        }
+        else if (score > 20) {
+            speed = 15
+        };
     };
 
     // Moving the snake's body segments along with snake's head.
